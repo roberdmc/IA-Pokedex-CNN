@@ -17,8 +17,6 @@ class_names = ['Abra', 'Alakazam', 'Blastoise', 'Bulbasaur', 'Charizard', 'Charm
 def get_dataset(path):
     pass
 
-print('test')
-print('oi')
 datadir = "C:\\Users\\Roberval.junior\\Downloads\\tensorflow-course-master\\tensorflow-course-master\\dataset\\train\\"
 
 new_array =[]
