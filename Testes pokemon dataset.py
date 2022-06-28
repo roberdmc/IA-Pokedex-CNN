@@ -141,5 +141,5 @@ model.save('modelPokemon.h5')
 print('Model Saved!')
 
 #For save model weights
-model.save_weights('modelPokemonWeights.h5')
-print('Model Weights Saved!')
+#model.save_weights('modelPokemonWeights.h5')
+#print('Model Weights Saved!')

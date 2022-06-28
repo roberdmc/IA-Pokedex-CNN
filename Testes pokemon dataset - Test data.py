@@ -17,10 +17,10 @@ class_names = ['Abra', 'Alakazam', 'Blastoise', 'Bulbasaur', 'Charizard', 'Charm
 
 model = load_model('modelPokemon.h5')
 print('Model Loaded!')
-model.sumary()
+model.summary()
 
-model = model.load_weights('modelPokemonWeights.h5')
-print('Model Weights Loaded!')
+#model.load_weights('modelPokemonWeights.h5')
+#print('Model Weights Loaded!')
 
 X_train = []
 y_train = []
