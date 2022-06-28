@@ -93,4 +93,4 @@ model.compile(loss='sparse_categorical_crossentropy',
               optimizer='adam',
               metrics=['accuracy'])
 
-model.fit(X, y, batch_size=8, epochs=1, validation_split=0.3)
+model.fit(X, y, batch_size=64, epochs=10, validation_split=0.3)
