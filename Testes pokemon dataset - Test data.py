@@ -42,9 +42,9 @@ X_test = pickle.load(pickle_in)
 pickle_in = open("y_test.pickle", "rb")
 y_test = pickle.load(pickle_in)
 
-test_loss, test_acc = model.evaluate(X_test,  y_test, batch_size=16, verbose=2)
+#test_loss, test_acc = model.evaluate(X_test,  y_test, batch_size=16, verbose=2)
 
-print('\nTest accuracy:', test_acc)
+#print('\nTest accuracy:', test_acc)
 
 predictions = model.predict(X_test)
 
@@ -78,7 +78,7 @@ def plot_value_array(i, predictions_array, true_label):
   plt.grid(False)
   plt.xticks([])
   plt.yticks([])
-  thisplot = plt.bar(range(10), predictions_array, color="#777777")
+  thisplot = plt.bar(range(32), predictions_array, color="#777777")
   plt.ylim([0, 1])
   predicted_label = np.argmax(predictions_array)
 
@@ -88,7 +88,7 @@ def plot_value_array(i, predictions_array, true_label):
 i = 0
 plt.figure(figsize=(6,3))
 plt.subplot(1,2,1)
-plot_image(i, predictions, y_test, X-test)
+plot_image(i, predictions, y_test, X_test)
 plt.subplot(1,2,2)
 plot_value_array(i, predictions,  y_test)
 plt.show()

@@ -48,7 +48,7 @@ for category in tqdm(class_names):
     for img in os.listdir(path):
         img_array = cv2.imread(os.path.join(path, img), cv2.IMREAD_GRAYSCALE)
         new_array = cv2.resize(img_array, (IMG_SIZE, IMG_SIZE))
-        training_data.append([new_array, class_num])
+        testing_data.append([new_array, class_num])
         #plt.imshow(new_array, cmap='gray')
         #plt.show()
 
