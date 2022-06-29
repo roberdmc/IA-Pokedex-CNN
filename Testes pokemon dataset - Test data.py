@@ -13,11 +13,8 @@ from tensorflow.keras.layers import Conv2D, MaxPooling2D
 from keras.models import load_model
 from numpy import random
 
-class_names = ['Alakazam', 'Blastoise', 'Bulbasaur', 'Charizard', 'Charmander', 'Gastly', 
-               'Gengar', 'Pikachu', 'Snorlax', 'Squirtle', 'Venusaur']
-
-#class_names = ['Alakazam', 'Blastoise', 'Charizard',
-#               'Gengar', 'Pikachu', 'Venusaur']
+class_names = ['Arbok', 'Arcanine', 'Blastoise', 'Butterfree', 'Charizard', 'Gengar', 'Gyarados', 'Jigglypuff',  
+               'Machamp', 'Mewtwo', 'Ninetales', 'Pikachu', 'Psyduck', 'Starmie', 'Tauros', 'Vileplume', 'Voltorb']
 
 def get_dataset(path):
     pass
@@ -26,11 +23,11 @@ model = load_model('modelPokemon.h5')
 print('Model Loaded!')
 model.summary()
 
-datadir_test = "dataset\\test_unitary\\"
+datadir_test = "dataset\\test_17_dupla\\"
 
 new_array =[]
 testing_data = []
-IMG_SIZE = 25
+IMG_SIZE = 75
 
 #For test data
 for category in tqdm(class_names):
@@ -39,7 +36,7 @@ for category in tqdm(class_names):
     
     # now we get each of them images
     for img in os.listdir(path):
-        img_array = cv2.imread(os.path.join(path, img), cv2.IMREAD_COLOR)
+        img_array = cv2.imread(os.path.join(path, img), cv2.COLOR_GRAY2BGR)
         new_array = cv2.resize(img_array, (IMG_SIZE, IMG_SIZE))
         testing_data.append([new_array, class_num])
         #plt.imshow(new_array, cmap='gray')
@@ -112,7 +109,7 @@ def plot_value_array(i, predictions_array, true_label):
   plt.grid(False)
   plt.xticks([])
   plt.yticks([])
-  thisplot = plt.bar(range(11), predictions_array, color="#777777")
+  thisplot = plt.bar(range(25), predictions_array, color="#777777")
   plt.ylim([0, 1])
   predicted_label = np.argmax(predictions_array)
 
@@ -131,8 +128,8 @@ plt.show()
 
 # Plota o primeiro X test images, e as labels preditas, e as labels verdadeiras.
 # Colore as predições corretas de azul e as incorretas de vermelho.
-num_rows = 3
-num_cols = 4
+num_rows = 6
+num_cols = 6
 num_images = num_rows*num_cols
 plt.figure(figsize=(2*2*num_cols, 2*num_rows))
 

@@ -12,20 +12,17 @@ from tensorflow.keras.layers import Dense, Dropout, Activation, Flatten
 from tensorflow.keras.layers import Conv2D, MaxPooling2D
 from keras.models import load_model
 
-class_names = ['Alakazam', 'Blastoise', 'Bulbasaur', 'Charizard', 'Charmander', 'Gastly', 
-               'Gengar', 'Pikachu', 'Snorlax', 'Squirtle', 'Venusaur']
-
-#class_names = ['Alakazam', 'Blastoise', 'Charizard',
-#               'Gengar', 'Pikachu', 'Venusaur']
-               
+class_names = ['Arbok', 'Arcanine', 'Blastoise', 'Butterfree', 'Charizard', 'Gengar', 'Gyarados', 'Jigglypuff',  
+               'Machamp', 'Mewtwo', 'Ninetales', 'Pikachu', 'Psyduck', 'Starmie', 'Tauros', 'Vileplume', 'Voltorb']
+              
 def get_dataset(path):
     pass
 
-datadir_train = "dataset\\train\\"
+datadir_train = "dataset\\train_17\\"
 
 new_array =[]
 training_data = []
-IMG_SIZE = 25
+IMG_SIZE = 75
 
 #For train data
 for category in tqdm(class_names):
@@ -75,16 +72,16 @@ model.add(MaxPooling2D(pool_size=(2, 2)))
 
 model.add(Flatten())  # this converts our 3D feature maps to 1D feature vectors
 
-model.add(Dense(256))
+model.add(Dense(64))
 
-model.add(Dense(11))
+model.add(Dense(25))
 model.add(Activation('sigmoid'))
 
 model.compile(loss='sparse_categorical_crossentropy',
               optimizer='adam',
               metrics=['accuracy'])
 
-model.fit(X_train, y_train, batch_size=64, epochs=15, validation_split=0.3)
+model.fit(X_train, y_train, batch_size=64, epochs=12, validation_split=0.3)
 
 #For save model
 model.save('modelPokemon.h5')
