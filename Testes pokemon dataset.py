@@ -12,8 +12,8 @@ from tensorflow.keras.layers import Dense, Dropout, Activation, Flatten
 from tensorflow.keras.layers import Conv2D, MaxPooling2D
 from keras.models import load_model
 
-class_names = ['Arbok', 'Arcanine', 'Blastoise', 'Butterfree', 'Charizard', 'Gengar', 'Gyarados', 'Jigglypuff',  
-               'Machamp', 'Mewtwo', 'Ninetales', 'Pikachu', 'Psyduck', 'Starmie', 'Tauros', 'Vileplume', 'Voltorb']
+class_names = ['Arbok', 'Arcanine', 'Blastoise', 'Butterfree', 'Charizard', 'Gengar', 'Jigglypuff',  
+               'Machamp', 'Mewtwo', 'Ninetales', 'Pikachu', 'Psyduck', 'Starmie', 'Tauros', 'Venusaur', 'Vileplume', 'Voltorb']
               
 def get_dataset(path):
     pass
@@ -22,7 +22,7 @@ datadir_train = "dataset\\train_17\\"
 
 new_array =[]
 training_data = []
-IMG_SIZE = 75
+IMG_SIZE = 25
 
 #For train data
 for category in tqdm(class_names):
@@ -81,7 +81,7 @@ model.compile(loss='sparse_categorical_crossentropy',
               optimizer='adam',
               metrics=['accuracy'])
 
-model.fit(X_train, y_train, batch_size=64, epochs=12, validation_split=0.3)
+model.fit(X_train, y_train, batch_size=128, epochs=20, validation_split=0.3)
 
 #For save model
 model.save('modelPokemon.h5')

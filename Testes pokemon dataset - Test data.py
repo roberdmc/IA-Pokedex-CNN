@@ -13,8 +13,8 @@ from tensorflow.keras.layers import Conv2D, MaxPooling2D
 from keras.models import load_model
 from numpy import random
 
-class_names = ['Arbok', 'Arcanine', 'Blastoise', 'Butterfree', 'Charizard', 'Gengar', 'Gyarados', 'Jigglypuff',  
-               'Machamp', 'Mewtwo', 'Ninetales', 'Pikachu', 'Psyduck', 'Starmie', 'Tauros', 'Vileplume', 'Voltorb']
+class_names = ['Arbok', 'Arcanine', 'Blastoise', 'Butterfree', 'Charizard', 'Gengar', 'Jigglypuff',  
+               'Machamp', 'Mewtwo', 'Ninetales', 'Pikachu', 'Psyduck', 'Starmie', 'Tauros', 'Venusaur', 'Vileplume', 'Voltorb']
 
 def get_dataset(path):
     pass
@@ -27,7 +27,7 @@ datadir_test = "dataset\\test_17_dupla\\"
 
 new_array =[]
 testing_data = []
-IMG_SIZE = 75
+IMG_SIZE = 25
 
 #For test data
 for category in tqdm(class_names):
@@ -36,7 +36,7 @@ for category in tqdm(class_names):
     
     # now we get each of them images
     for img in os.listdir(path):
-        img_array = cv2.imread(os.path.join(path, img), cv2.COLOR_GRAY2BGR)
+        img_array = cv2.imread(os.path.join(path, img), cv2.IMREAD_COLOR)
         new_array = cv2.resize(img_array, (IMG_SIZE, IMG_SIZE))
         testing_data.append([new_array, class_num])
         #plt.imshow(new_array, cmap='gray')
@@ -104,18 +104,6 @@ def plot_image(i, predictions_array, true_label, img):
                                   class_names[true_label]),
                                   color=color)
 
-def plot_value_array(i, predictions_array, true_label):
-  predictions_array, true_label = predictions_array[i], true_label[i]
-  plt.grid(False)
-  plt.xticks([])
-  plt.yticks([])
-  thisplot = plt.bar(range(25), predictions_array, color="#777777")
-  plt.ylim([0, 1])
-  predicted_label = np.argmax(predictions_array)
-
-  thisplot[predicted_label].set_color('red')
-  thisplot[true_label].set_color('blue')
-
 '''
 i = 0
 plt.figure(figsize=(6,3))
@@ -127,15 +115,14 @@ plt.show()
 '''
 
 # Plota o primeiro X test images, e as labels preditas, e as labels verdadeiras.
-# Colore as predições corretas de azul e as incorretas de vermelho.
-num_rows = 6
-num_cols = 6
+num_rows = 5
+num_cols = 7
 num_images = num_rows*num_cols
+num_images = num_images - 3
 plt.figure(figsize=(2*2*num_cols, 2*num_rows))
 
+i=37
 for i in range(num_images):
   plt.subplot(num_rows, 2*num_cols, 2*i+1)
   plot_image(i, predictions, y_test, X_test)
-  plt.subplot(num_rows, 2*num_cols, 2*i+2)
-  plot_value_array(i, predictions, y_test)
 plt.show()
