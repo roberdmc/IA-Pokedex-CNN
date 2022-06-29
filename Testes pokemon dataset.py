@@ -54,11 +54,11 @@ X_train = np.array(X_train)
 y_train = np.array(y_train)
 
 #Exporta os dados de treino (imagens e labels)
-pickle_out = open("X_train.pickle", "wb")
+pickle_out = open("exported_files\\X_train.pickle", "wb")
 pickle.dump(X_train, pickle_out)
 pickle_out.close()
 
-pickle_out = open("y_train.pickle", "wb")
+pickle_out = open("exported_files\\y_train.pickle", "wb")
 pickle.dump(y_train, pickle_out)
 pickle_out.close()
 
@@ -88,5 +88,5 @@ model.compile(loss='sparse_categorical_crossentropy',
 model.fit(X_train, y_train, batch_size=256, epochs=50, validation_split=0.3)
 
 #Salva o modelo gerado e treinado
-model.save('modelPokemon.h5')
+model.save('exported_files\\modelPokemon.h5')
 print('Model Saved!')

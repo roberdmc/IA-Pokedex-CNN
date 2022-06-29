@@ -21,7 +21,7 @@ def get_dataset(path):
     pass
 
 #Carrega a rede neural gerada no aprendizado
-model = load_model('modelPokemon.h5')
+model = load_model('exported_files\\modelPokemon.h5')
 print('Model Loaded!')
 model.summary()
 
@@ -60,11 +60,11 @@ X_test = np.array(X_test)
 y_test = np.array(y_test)
 
 #Exporta os dados de teste (imagens e labels)
-pickle_out = open("X_test.pickle", "wb")
+pickle_out = open("exported_files\\X_test.pickle", "wb")
 pickle.dump(X_test, pickle_out)
 pickle_out.close()
 
-pickle_out = open("y_test.pickle", "wb")
+pickle_out = open("exported_files\\y_test.pickle", "wb")
 pickle.dump(y_test, pickle_out)
 pickle_out.close()
 
