@@ -13,21 +13,26 @@ from tensorflow.keras.layers import Conv2D, MaxPooling2D
 from keras.models import load_model
 from numpy import random
 
-class_names = ['Arbok', 'Arcanine', 'Blastoise', 'Butterfree', 'Charizard', 'Gengar', 'Jigglypuff',  
-               'Machamp', 'Mewtwo', 'Ninetales', 'Pikachu', 'Psyduck', 'Starmie', 'Tauros', 'Venusaur', 'Vileplume', 'Voltorb']
+#Define o nome das classes
+class_names = ['Arbok', 'Arcanine', 'Bellsprout', 'Blastoise', 'Butterfree', 'Charizard', 'Ditto', 'Gengar', 'Jigglypuff',  
+               'Machamp', 'Mankey', 'Metapod', 'Mewtwo', 'Parasect', 'Pikachu', 'Poliwag', 'Psyduck', 'Voltorb']
 
 def get_dataset(path):
     pass
 
+#Carrega a rede neural gerada no aprendizado
 model = load_model('modelPokemon.h5')
 print('Model Loaded!')
 model.summary()
 
+#Define o diretório do conjunto de testes
 datadir_test = "dataset\\test_17_dupla\\"
 
 new_array =[]
 testing_data = []
-IMG_SIZE = 75
+
+#Define o tamanho em altura e largura para o redimensiomanento das imagens
+IMG_SIZE = 50
 
 #For test data
 for category in tqdm(class_names):
@@ -46,47 +51,26 @@ for category in tqdm(class_names):
 X_test = []
 y_test = []
 
-#For test data
+#Define os conjuntos de imagens e labels
 for features, label in testing_data:
     X_test.append(features)
     y_test.append(label)
 
+#Converte os vetores de imagens e labels para np array
 X_test = np.array(X_test)
 y_test = np.array(y_test)
 
-'''
-#Dump for test data
-pickle_out = open("X_test.pickle", "wb")
-pickle.dump(X_test, pickle_out)
-pickle_out.close()
-
-pickle_out = open("y_test.pickle", "wb")
-pickle.dump(y_test, pickle_out)
-pickle_out.close()
-
-X_test = []
-y_test = []
-
-#Load test data
-pickle_in = open("X_test.pickle", "rb")
-X_test = pickle.load(pickle_in)
-
-pickle_in = open("y_test.pickle", "rb")
-y_test = pickle.load(pickle_in)
-'''
-
+#Calcula a acurácia para o conjunto de testes
 test_loss, test_acc = model.evaluate(X_test,  y_test, batch_size=64, verbose=2)
-
 print('\nTest accuracy:', test_acc)
 
+#Realiza as predições para o conjunto de teste
 predictions = model.predict(X_test)
-
 predictions[0]
-
 np.argmax(predictions[0])
-
 y_test[0]
 
+#Função para a plotagem das imagens
 def plot_image(i, predictions_array, true_label, img):
     predictions_array, true_label, img = predictions_array[i], true_label[i], img[i]
     plt.grid(False)
@@ -106,6 +90,7 @@ def plot_image(i, predictions_array, true_label, img):
                                   class_names[true_label]),
                                   color=color)
 
+#Plota uma unica imagem
 '''
 i = 0
 plt.figure(figsize=(6,3))
@@ -116,11 +101,11 @@ plot_value_array(i, predictions,  y_test)
 plt.show()
 '''
 
-# Plota o primeiro X test images, e as labels preditas, e as labels verdadeiras.
-num_rows = 5
-num_cols = 7
+#Plota o primeiro X test images, e as labels preditas, e as labels verdadeiras.
+num_rows = 6
+num_cols = 6
 num_images = num_rows*num_cols
-num_images = num_images - 3
+num_images = num_images
 plt.figure(figsize=(2*2*num_cols, 2*num_rows))
 
 for i in range(num_images):

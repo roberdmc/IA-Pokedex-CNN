@@ -12,8 +12,8 @@ from tensorflow.keras.layers import Dense, Dropout, Activation, Flatten
 from tensorflow.keras.layers import Conv2D, MaxPooling2D
 from keras.models import load_model
 
-class_names = ['Arbok', 'Arcanine', 'Blastoise', 'Butterfree', 'Charizard', 'Gengar', 'Jigglypuff',  
-               'Machamp', 'Mewtwo', 'Ninetales', 'Pikachu', 'Psyduck', 'Starmie', 'Tauros', 'Venusaur', 'Vileplume', 'Voltorb']
+class_names = ['Arbok', 'Arcanine', 'Bellsprout', 'Blastoise', 'Butterfree', 'Charizard', 'Ditto', 'Gengar', 'Jigglypuff',  
+               'Machamp', 'Mankey', 'Metapod', 'Mewtwo', 'Parasect', 'Pikachu', 'Poliwag', 'Psyduck', 'Voltorb']
               
 def get_dataset(path):
     pass
@@ -22,7 +22,7 @@ datadir_train = "dataset\\train_17\\"
 
 new_array =[]
 training_data = []
-IMG_SIZE = 25
+IMG_SIZE = 50
 
 #For train data
 for category in tqdm(class_names):
@@ -31,7 +31,7 @@ for category in tqdm(class_names):
     
     # now we get each of them images
     for img in os.listdir(path):
-        img_array = cv2.imread(os.path.join(path, img), cv2.IMREAD_COLOR)
+        img_array = cv2.imread(os.path.join(path, img), cv2.IMREAD_UNCHANGED)
         new_array = cv2.resize(img_array, (IMG_SIZE, IMG_SIZE))
         training_data.append([new_array, class_num])
         #plt.imshow(new_array, cmap='gray')
@@ -74,14 +74,14 @@ model.add(Dense(256))
 
 model.add(Flatten())  # this converts our 3D feature maps to 1D feature vectors
 
-model.add(Dense(17))
+model.add(Dense(18))
 model.add(Activation('sigmoid'))
 
 model.compile(loss='sparse_categorical_crossentropy',
               optimizer='adam',
               metrics=['accuracy'])
 
-model.fit(X_train, y_train, batch_size=128, epochs=20, validation_split=0.3)
+model.fit(X_train, y_train, batch_size=64, epochs=10, validation_split=0.3)
 
 #For save model
 model.save('modelPokemon.h5')
