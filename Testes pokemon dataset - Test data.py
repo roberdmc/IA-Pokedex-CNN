@@ -59,6 +59,15 @@ for features, label in testing_data:
 X_test = np.array(X_test)
 y_test = np.array(y_test)
 
+#Exporta os dados de teste (imagens e labels)
+pickle_out = open("X_test.pickle", "wb")
+pickle.dump(X_test, pickle_out)
+pickle_out.close()
+
+pickle_out = open("y_test.pickle", "wb")
+pickle.dump(y_test, pickle_out)
+pickle_out.close()
+
 #Calcula a acurácia para o conjunto de testes
 test_loss, test_acc = model.evaluate(X_test,  y_test, batch_size=64, verbose=2)
 print('\nTest accuracy:', test_acc)
