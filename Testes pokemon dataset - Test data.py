@@ -26,7 +26,7 @@ print('Model Loaded!')
 model.summary()
 
 #Define o diretório do conjunto de testes
-datadir_test = "dataset\\test_17_dupla\\"
+datadir_test = "dataset\\test_17\\"
 
 new_array =[]
 testing_data = []
@@ -34,24 +34,23 @@ testing_data = []
 #Define o tamanho em altura e largura para o redimensiomanento das imagens
 IMG_SIZE = 50
 
-#For test data
+#Gera o testing_data para o conjunto de testes
 for category in tqdm(class_names):
-    path = os.path.join(datadir_test, category) # path for each of the pokemons
+    path = os.path.join(datadir_test, category) #Caminho para cada pokémon
     class_num = class_names.index(category)
     
-    # now we get each of them images
+    #Processa cada uma das imagens
     for img in os.listdir(path):
         img_array = cv2.imread(os.path.join(path, img), cv2.IMREAD_UNCHANGED)
         new_array = cv2.resize(img_array, (IMG_SIZE, IMG_SIZE))
         testing_data.append([new_array, class_num])
-        #plt.imshow(new_array, cmap='gray')
-        #plt.show()
+
         
-#For test data
+#Cria os vetores para as imagens "X" e labels "y"
 X_test = []
 y_test = []
 
-#Define os conjuntos de imagens e labels
+#Define os conjuntos de imagens "X" e labels "y"
 for features, label in testing_data:
     X_test.append(features)
     y_test.append(label)
@@ -70,7 +69,7 @@ predictions[0]
 np.argmax(predictions[0])
 y_test[0]
 
-#Função para a plotagem das imagens
+#Função para a plotagem das imagens com os seus dados previstos, verdadeiros e a acurácia
 def plot_image(i, predictions_array, true_label, img):
     predictions_array, true_label, img = predictions_array[i], true_label[i], img[i]
     plt.grid(False)
@@ -101,7 +100,7 @@ plot_value_array(i, predictions,  y_test)
 plt.show()
 '''
 
-#Plota o primeiro X test images, e as labels preditas, e as labels verdadeiras.
+#Plota as primeiras imagens de teste, as labels preditas, as labels verdadeiras e a acurácia.
 num_rows = 6
 num_cols = 6
 num_images = num_rows*num_cols
