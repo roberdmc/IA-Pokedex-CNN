@@ -27,7 +27,7 @@ datadir_test = "dataset\\test_17_dupla\\"
 
 new_array =[]
 testing_data = []
-IMG_SIZE = 25
+IMG_SIZE = 75
 
 #For test data
 for category in tqdm(class_names):
@@ -36,7 +36,7 @@ for category in tqdm(class_names):
     
     # now we get each of them images
     for img in os.listdir(path):
-        img_array = cv2.imread(os.path.join(path, img), cv2.IMREAD_COLOR)
+        img_array = cv2.imread(os.path.join(path, img), cv2.IMREAD_UNCHANGED)
         new_array = cv2.resize(img_array, (IMG_SIZE, IMG_SIZE))
         testing_data.append([new_array, class_num])
         #plt.imshow(new_array, cmap='gray')
@@ -54,6 +54,7 @@ for features, label in testing_data:
 X_test = np.array(X_test)
 y_test = np.array(y_test)
 
+'''
 #Dump for test data
 pickle_out = open("X_test.pickle", "wb")
 pickle.dump(X_test, pickle_out)
@@ -72,6 +73,7 @@ X_test = pickle.load(pickle_in)
 
 pickle_in = open("y_test.pickle", "rb")
 y_test = pickle.load(pickle_in)
+'''
 
 test_loss, test_acc = model.evaluate(X_test,  y_test, batch_size=64, verbose=2)
 
@@ -91,7 +93,7 @@ def plot_image(i, predictions_array, true_label, img):
     plt.xticks([])
     plt.yticks([])
 
-    plt.imshow(img, cmap=plt.cm.binary)
+    plt.imshow(img[:,:,::-1], cmap=plt.cm.binary)
 
     predicted_label = np.argmax(predictions_array)
     if predicted_label == true_label:
@@ -121,7 +123,6 @@ num_images = num_rows*num_cols
 num_images = num_images - 3
 plt.figure(figsize=(2*2*num_cols, 2*num_rows))
 
-i=37
 for i in range(num_images):
   plt.subplot(num_rows, 2*num_cols, 2*i+1)
   plot_image(i, predictions, y_test, X_test)
