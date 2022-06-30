@@ -10,7 +10,7 @@ from keras.models import Sequential, load_model
 from keras.layers import Dense, Dropout, Activation, Flatten, Conv2D, MaxPooling2D
 
 #Define o nome das classes
-class_names = ['Abra', 'Bulbasaur', 'Charmander', 'Gastly', 'Meowth', 'Pidgey', 'Pikachu', 'Squirtle', 'Staryu']
+class_names = ['Bulbasaur', 'Charmander', 'Gastly', 'Meowth', 'Pidgey', 'Pikachu', 'Squirtle']
               
 def get_dataset(path):
     pass
@@ -22,7 +22,7 @@ new_array =[]
 training_data = []
 
 #Define o tamanho em altura e largura para o redimensiomanento das imagens
-IMG_SIZE = 100
+IMG_SIZE = 50
 
 #Gera o training_data para o conjunto de treinamento
 for category in tqdm(class_names):
@@ -61,15 +61,13 @@ model.add(Conv2D(128, (3, 3), activation = 'relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(Conv2D(256, (3, 3), activation = 'relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
-model.add(Conv2D(512, (3, 3), activation = 'relu'))
-model.add(MaxPooling2D(pool_size=(2, 2)))
 
 # Converte feature maps 3D para feature vectors 1D
 model.add(Flatten())  
 
 #Hidden Layer
-model.add(Dense(1024, activation = 'relu'))
-model.add(Dense(1024, activation = 'relu'))
+model.add(Dense(512, activation = 'relu'))
+model.add(Dense(512, activation = 'relu'))
 
 #Output Layer
 model.add(Dense(len(class_names)))
@@ -79,7 +77,7 @@ model.compile(loss='sparse_categorical_crossentropy',
               optimizer='adam',
               metrics=['accuracy'])
 
-model.fit(X_train, y_train, batch_size=128, epochs=20, validation_split=0.3)
+model.fit(X_train, y_train, batch_size=128, epochs=11, validation_split=0.03)
 
 #Salva o modelo gerado e treinado
 model.save('exported_files\\modelPokemon.h5')

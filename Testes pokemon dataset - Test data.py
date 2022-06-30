@@ -10,7 +10,7 @@ from keras.models import Sequential, load_model
 from keras.layers import Dense, Dropout, Activation, Flatten, Conv2D, MaxPooling2D
 
 #Define o nome das classes
-class_names = ['Abra', 'Bulbasaur', 'Charmander', 'Gastly', 'Meowth', 'Pidgey', 'Pikachu', 'Squirtle', 'Staryu']
+class_names = ['Bulbasaur', 'Charmander', 'Gastly', 'Meowth', 'Pidgey', 'Pikachu', 'Squirtle']
 
 def get_dataset(path):
     pass
@@ -27,7 +27,7 @@ new_array =[]
 testing_data = []
 
 #Define o tamanho em altura e largura para o redimensiomanento das imagens
-IMG_SIZE = 70
+IMG_SIZE = 50
 
 #Gera o testing_data para o conjunto de testes
 for category in tqdm(class_names):
