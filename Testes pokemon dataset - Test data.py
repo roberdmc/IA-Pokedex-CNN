@@ -15,13 +15,9 @@ class_names = ['Abra', 'Arbok', 'Arcanine', 'Bellsprout', 'Blastoise','Bulbasaur
                'Mankey', 'Meowth', 'Metapod', 'Mewtwo', 'Parasect', 'Pidgey', 'Pikachu', 'Poliwag', 
                'Psyduck','Squirtle', 'Staryu', 'Voltorb']
 
-def get_dataset(path):
-    pass
-
 #Carrega a rede neural gerada no aprendizado
 model = load_model('exported_files\\modelPokemon.h5')
 print('Model Loaded!')
-model.summary()
 
 #Define o diretório do conjunto de testes
 datadir_test = "dataset\\test_17\\"
@@ -43,6 +39,9 @@ for category in tqdm(class_names):
         new_array = cv2.resize(img_array[:,:,::-1], (IMG_SIZE, IMG_SIZE))
         testing_data.append([new_array, class_num])
 
+#Embaralha as imagens de teste
+np.random.shuffle(testing_data)
+
 #Cria os vetores para as imagens "X" e labels "y"
 X_test = []
 y_test = []
@@ -62,10 +61,6 @@ print('\nTest accuracy:', test_acc)
 
 #Realiza as predições para o conjunto de teste
 predictions = model.predict(X_test)
-predictions[0]
-np.argmax(predictions[0])
-y_test[0]
-
 #Função para a plotagem das imagens com os seus dados previstos, verdadeiros e a acurácia
 def plot_image(i, predictions_array, true_label, img):
     predictions_array, true_label, img = predictions_array[i], true_label[i], img[i]
@@ -86,9 +81,9 @@ def plot_image(i, predictions_array, true_label, img):
                                   class_names[true_label]),
                                   color=color)
 
-#Plota as primeiras imagens de teste, as labels preditas, as labels verdadeiras e a acurácia.
-num_rows = 6
-num_cols = 6
+#Plota 25 imagens aleatorias do conjunto de teste, labels preditas, labels verdadeiras e acurácia.
+num_rows = 5
+num_cols = 5
 num_images = num_rows*num_cols
 num_images = num_images
 plt.figure(figsize=(2*2*num_cols, 2*num_rows))
