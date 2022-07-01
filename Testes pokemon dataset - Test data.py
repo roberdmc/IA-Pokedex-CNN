@@ -10,7 +10,10 @@ from keras.models import Sequential, load_model
 from keras.layers import Dense, Dropout, Activation, Flatten, Conv2D, MaxPooling2D
 
 #Define o nome das classes
-class_names = ['Bulbasaur', 'Charmander', 'Gastly', 'Meowth', 'Pidgey', 'Pikachu', 'Squirtle']
+class_names = ['Abra', 'Arbok', 'Arcanine', 'Bellsprout', 'Blastoise','Bulbasaur', 'Butterfree',
+               'Charizard', 'Charmander', 'Ditto', 'Gastly', 'Gengar', 'Jigglypuff', 'Machamp', 
+               'Mankey', 'Meowth', 'Metapod', 'Mewtwo', 'Parasect', 'Pidgey', 'Pikachu', 'Poliwag', 
+               'Psyduck','Squirtle', 'Staryu', 'Voltorb']
 
 def get_dataset(path):
     pass
@@ -21,7 +24,7 @@ print('Model Loaded!')
 model.summary()
 
 #Define o diretório do conjunto de testes
-datadir_test = "dataset_new\\test_17\\"
+datadir_test = "dataset\\test_17\\"
 
 new_array =[]
 testing_data = []
@@ -93,4 +96,4 @@ plt.figure(figsize=(2*2*num_cols, 2*num_rows))
 for i in range(num_images):
   plt.subplot(num_rows, 2*num_cols, 2*i+1)
   plot_image(i, predictions, y_test, X_test)
-#plt.show()
+plt.show()

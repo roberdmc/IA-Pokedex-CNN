@@ -10,13 +10,16 @@ from keras.models import Sequential, load_model
 from keras.layers import Dense, Dropout, Activation, Flatten, Conv2D, MaxPooling2D
 
 #Define o nome das classes
-class_names = ['Bulbasaur', 'Charmander', 'Gastly', 'Meowth', 'Pidgey', 'Pikachu', 'Squirtle']
-              
+class_names = ['Abra', 'Arbok', 'Arcanine', 'Bellsprout', 'Blastoise','Bulbasaur', 'Butterfree',
+               'Charizard', 'Charmander', 'Ditto', 'Gastly', 'Gengar', 'Jigglypuff', 'Machamp', 
+               'Mankey', 'Meowth', 'Metapod', 'Mewtwo', 'Parasect', 'Pidgey', 'Pikachu', 'Poliwag', 
+               'Psyduck','Squirtle', 'Staryu', 'Voltorb']
+
 def get_dataset(path):
     pass
 
 #Define o diretório do conjunto de treinamento
-datadir_train = "dataset_new\\train_17\\"
+datadir_train = "dataset\\train_17\\"
 
 new_array =[]
 training_data = []
@@ -66,18 +69,18 @@ model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(Flatten())  
 
 #Hidden Layer
-model.add(Dense(512, activation = 'relu'))
-model.add(Dense(512, activation = 'relu'))
+model.add(Dense(256, activation = 'relu'))
+model.add(Dense(256, activation = 'relu'))
+model.add(Dense(256, activation = 'relu'))
 
 #Output Layer
-model.add(Dense(len(class_names)))
-model.add(Activation('sigmoid'))
+model.add(Dense(len(class_names), activation = 'sigmoid'))
 
 model.compile(loss='sparse_categorical_crossentropy',
               optimizer='adam',
               metrics=['accuracy'])
 
-model.fit(X_train, y_train, batch_size=128, epochs=11, validation_split=0.03)
+model.fit(X_train, y_train, batch_size=128, epochs=25)
 
 #Salva o modelo gerado e treinado
 model.save('exported_files\\modelPokemon.h5')
