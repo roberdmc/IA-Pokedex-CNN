@@ -1,0 +1,6 @@
+1, 2, 3, 4 e 5 convoluções
+1, 2, 3 e 4 camadas ocultas
+neuronios de 512, 256, 128 e 64
+
+tamanhos de imagem de 25x25, 50x50, 75x75 e 100x100
+
