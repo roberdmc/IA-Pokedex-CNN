@@ -52,7 +52,6 @@ def train_network(class_names, model, IMG_SIZE):
     # Converte feature maps 3D para feature vectors 1D
     model.add(Flatten())  
 
-    #Hidden Layer
     model.add(Dense(256, activation = 'relu'))
     model.add(Dense(256, activation = 'relu'))
 
