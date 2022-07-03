@@ -59,8 +59,7 @@ def total_test(class_names, model, IMG_SIZE):
         else:
             color = 'red'
 
-        plt.xlabel("{} {:2.0f}% ({})".format(class_names[predicted_label],
-                                    100*np.max(predictions_array),
+        plt.xlabel("{} ({})".format(class_names[predicted_label],
                                     class_names[true_label]),
                                     color=color)
     

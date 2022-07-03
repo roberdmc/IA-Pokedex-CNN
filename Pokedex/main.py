@@ -62,4 +62,4 @@ if __name__=='__main__':
             print('Exiting.')
             exit()
         else:
-            print('Invalid option. Please enter a number between 1 and 6.')
+            print('Invalid option. Please enter a number between 1 and 5.')

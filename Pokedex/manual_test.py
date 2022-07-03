@@ -1,8 +1,5 @@
-import os, cv2, numpy as np
-from tqdm import tqdm
+import cv2, numpy as np
 from matplotlib import pyplot as plt
-from keras.models import Sequential, load_model
-from keras.layers import Dense, Flatten, Conv2D, MaxPooling2D
 
 def manual_test(class_names, model, IMG_SIZE):
     #Define o diretório do conjunto de testes
@@ -44,8 +41,7 @@ def manual_test(class_names, model, IMG_SIZE):
         
         color = 'blue'
 
-        plt.xlabel("{} {:2.0f}%".format(class_names[predicted_label],
-                                      100*np.max(predictions_array)),
+        plt.xlabel("{}".format(class_names[predicted_label]),
                                       color=color)
 
     #Plota uma unica imagem
