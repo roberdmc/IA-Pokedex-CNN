@@ -72,4 +72,6 @@ def total_test(class_names, model, IMG_SIZE):
     for i in range(num_images):
       plt.subplot(num_rows, 2*num_cols, 2*i+1)
       plot_image(i, predictions, y_test, X_test)
+    plt.tight_layout()
+    plt.get_current_fig_manager().window.state('zoomed') #Toggle fullscreen mode
     plt.show()
