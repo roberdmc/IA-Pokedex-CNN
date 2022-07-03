@@ -59,11 +59,10 @@ def train_network(class_names, model, IMG_SIZE):
     #Output Layer
     model.add(Dense(len(class_names), activation = 'sigmoid'))
 
-    model.compile(loss='sparse_categorical_crossentropy',
-                optimizer='adam',
-                metrics=['accuracy'])
+    model.compile(loss='sparse_categorical_crossentropy', 
+                    optimizer='adam', metrics=['accuracy'])
 
-    model.fit(X_train, y_train, batch_size=128, epochs=25)
+    model.fit(X_train, y_train, batch_size=64, epochs=50)
 
     #Salva o modelo gerado e treinado
     model.save('exported_files\\modelPokemon.h5')

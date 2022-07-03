@@ -1,8 +1,7 @@
 import os, cv2, numpy as np
 from tqdm import tqdm
 from matplotlib import pyplot as plt
-from keras.models import Sequential, load_model
-from keras.layers import Dense, Flatten, Conv2D, MaxPooling2D
+from random import shuffle
 
 def total_test(class_names, model, IMG_SIZE):
     #Define o diretório do conjunto de testes

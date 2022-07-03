@@ -14,7 +14,7 @@ class_names = ['Arbok', 'Arcanine', 'Bellsprout', 'Blastoise','Bulbasaur', 'Butt
 model = load_model('exported_files\\modelPokemon.h5')
 
 #Define o tamanho em altura e largura para o redimensiomanento das imagens
-IMG_SIZE = 75
+IMG_SIZE = 100
 
 menu_options = {
     1: 'Total test',
@@ -47,16 +47,19 @@ if __name__=='__main__':
             try:
                 manual_test(class_names, model, IMG_SIZE)
             except:
-                print('\nArquivo invalido!\n')
+                print('\nInvalid file!\n')
         elif option == 4:
             train_network(class_names, model, IMG_SIZE)
             model = load_model('exported_files\\modelPokemon.h5')
             print('\nNew Model loaded!\n')
         elif option == 5:
-            model = load_model('exported_files\\bestModel.h5')
-            print('\nBest Model loaded!\n')
+            try:
+                model = load_model('exported_files\\bestModel.h5')
+                print('\nBest Model loaded!\n')
+            except:
+                print('\nInvalid file\n')
         elif option == 6:
             print('Exiting.')
             exit()
         else:
-            print('Invalid option. Please enter a number between 1 and 5.')
+            print('Invalid option. Please enter a number between 1 and 6.')
